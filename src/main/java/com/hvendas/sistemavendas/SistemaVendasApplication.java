@@ -8,7 +8,7 @@ public class SistemaVendasApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaVendasApplication.class, args);
-		//envio
+
 	}
 
 }
