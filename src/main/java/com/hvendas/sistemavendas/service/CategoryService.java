@@ -22,4 +22,8 @@ public class CategoryService {
 	public Optional<Category> findById(Long codigo){
 		return categoryRepo.findById(codigo);
 	}
+	
+	public Category salvar(Category category) {
+		return categoryRepo.save(category);
+	}
 }
