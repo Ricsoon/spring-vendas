@@ -3,6 +3,8 @@ package com.hvendas.sistemavendas.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +38,13 @@ public class CategoryController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Category> save(@RequestBody Category category) {
+	public ResponseEntity<Category> save(@Valid @RequestBody Category category) {
 		Category categoriaSalva = categoryService.save(category);
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
 	}
 
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Category> update(@PathVariable Long codigo, @RequestBody Category category) {
+	public ResponseEntity<Category> update(@PathVariable Long codigo, @Valid @RequestBody Category category) {
 		return ResponseEntity.ok(categoryService.update(codigo, category));
 	}
 
