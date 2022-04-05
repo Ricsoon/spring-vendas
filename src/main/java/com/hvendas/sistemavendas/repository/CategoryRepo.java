@@ -6,4 +6,5 @@ import com.hvendas.sistemavendas.entities.Category;
 
 public interface CategoryRepo extends JpaRepository<Category, Long>{
 
+	Category findByName(String name);
 }

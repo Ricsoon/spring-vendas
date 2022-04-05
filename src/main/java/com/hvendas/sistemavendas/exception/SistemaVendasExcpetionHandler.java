@@ -34,6 +34,14 @@ public class SistemaVendasExcpetionHandler extends ResponseEntityExceptionHandle
 		String msgUser = "Recurso não encontrado.";
 		String msgDev = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(msgUser, msgDev));
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+	}
+	
+	@ExceptionHandler(BusinessRuleException.class)
+	public ResponseEntity<Object> handleBusinessRuleException(BusinessRuleException ex, WebRequest request){
+		String msgUser = ex.getMessage();
+		String msgDev = ex.getMessage();
+		List<Erro> erros = Arrays.asList(new Erro(msgUser, msgDev));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 
