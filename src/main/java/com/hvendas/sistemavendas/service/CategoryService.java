@@ -34,6 +34,10 @@ public class CategoryService {
 		BeanUtils.copyProperties(category, saveCategory, "codigo");
 		return categoryRepo.save(saveCategory);
 	}
+	
+	public void delete(Long codigo) {
+		categoryRepo.deleteById(codigo);
+	}
 
 	private Category categoryValidation(Long codigo) {
 		Optional<Category> category = findById(codigo);
