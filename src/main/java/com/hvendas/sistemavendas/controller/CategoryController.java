@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hvendas.sistemavendas.entities.Category;
 import com.hvendas.sistemavendas.service.CategoryService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = "Categoria")
 @RestController
 @RequestMapping("/categoria")
 public class CategoryController {
@@ -26,23 +30,27 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
+	@ApiOperation(value = "Listar")
 	@GetMapping
 	public List<Category> listAll() {
 		return categoryService.listAll();
 	}
 
+	@ApiOperation(value = "Listar por código")
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Optional<Category>> findById(@PathVariable Long codigo) {
 		Optional<Category> category = categoryService.findById(codigo);
 		return category.isPresent() ? ResponseEntity.ok(category) : ResponseEntity.notFound().build();
 	}
 
+	@ApiOperation(value = "Salvar")
 	@PostMapping
 	public ResponseEntity<Category> save(@Valid @RequestBody Category category) {
 		Category categoriaSalva = categoryService.save(category);
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
 	}
 
+	@ApiOperation(value = "Atualizar")
 	@PutMapping("/{codigo}")
 	public ResponseEntity<Category> update(@PathVariable Long codigo, @Valid @RequestBody Category category) {
 		return ResponseEntity.ok(categoryService.update(codigo, category));
